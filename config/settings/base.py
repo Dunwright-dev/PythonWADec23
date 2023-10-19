@@ -93,6 +93,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.github",
     "allauth.socialaccount.providers.google",
     "django_htmx",
+    "htmx",
     "tailwind",
     "theme",
 ]
