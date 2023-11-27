@@ -1,0 +1,51 @@
+<div x-data="{ open: false }" class="flex justify-center z-50">
+  <!-- Modal -->
+  <div
+    x-show="$store.displayModal.on"
+    style="display: none"
+    x-on:keydown.escape.prevent.stop="$store.displayModal.hideModal()"
+    role="dialog"
+    aria-modal="true"
+    x-id="['modal-title']"
+    :aria-labelledby="$id('modal-title')"
+    class="fixed inset-0 z-50 overflow-y-auto"
+  >
+    <!-- Overlay -->
+    <div
+      x-show="$store.displayModal.on"
+      x-transition.opacity
+      class="fixed inset-0 bg-black bg-opacity-50"
+    ></div>
+    <!-- Panel -->
+    <div
+      x-show="$store.displayModal.on"
+      x-transition
+      x-on:click="$store.displayModal.hideModal()"
+      class="relative flex min-h-screen items-center justify-center p-4"
+    >
+      <div
+        x-on:click.stop
+        x-trap.noscroll.inert="$store.displayModal.on"
+        class="relative overflow-y-auto rounded-xl bg-gray-50 pb-12 shadow-lg"
+      >
+        <div
+          x-data="{}"
+          class="w-full h-12 flex justify-end lg:hidden">
+          <button
+            type="button"
+            x-on:click="$store.displayModal.hideModal()"
+            class="border-2 border-gray-500 rounded mr-2 mt-2 p-1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+          </button>
+        </div>
+        <div
+          id="modal"
+          class="px-12 lg:pt-12">
+          <!-- Inject HTML here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

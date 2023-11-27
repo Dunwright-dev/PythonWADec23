@@ -1,0 +1,156 @@
+{% load i18n %}
+<!-- Messages -->
+<div
+    x-data="{
+        notifications: [
+        {% for message in messages %}
+            { id: {{ forloop.counter }}, type: '{{ message.tags }}', content: '{{ message }}'},
+        {% endfor %}
+        ],
+        add(e) {
+            this.notifications.push({
+                id: e.timeStamp,
+                type: e.detail.type,
+                content: e.detail.content,
+            })
+        },
+        remove(notification) {
+            this.notifications = this.notifications.filter(i => i.id !== notification.id)
+        },
+    }"
+    @notify.window="add($event)"
+    role="status"
+    aria-live="polite"
+    class="fixed top-0 z-50 flex-col w-1/3 pb-4 pr-4 space-y-4 -translate-x-1/2 left-1/2 max-w-s sm:justify-start">
+    <!-- Notification -->
+    <template x-for="notification in notifications" :key="notification.id">
+        <div
+            x-data="{
+                show: false,
+                init() {
+                    this.$nextTick(() => this.show = true)
+
+                    setTimeout(() => this.transitionOut(), 5000)
+                },
+                transitionOut() {
+                    this.show = false
+
+                    setTimeout(() => this.remove(this.notification), 500)
+                },
+            }"
+            x-show="show"
+            x-transition:enter="transition origin-top ease-out duration-500"
+            x-transition:enter-start="transform -translate-y-full opacity-0"
+            x-transition:enter-end="transform translate-y-0 opacity-100"
+            x-transition:leave="transition origin-top ease-out duration-500"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="relative z-50 w-full max-w-sm py-4 pl-6 pr-4 -translate-x-1/2 bg-white border border-gray-200 rounded-md shadow-lg pointer-events-auto left-1/2">
+            <div
+                class="flex items-start">
+                <!-- Icons -->
+                <!-- Debug -->
+                <div
+                    x-show="notification.type === 'debug'"
+                    class="z-50 flex-shrink-0">
+                    <span
+                        aria-hidden="true"
+                        class="inline-flex items-center justify-center w-6 h-6 text-xl font-bold text-red-600 border-2 border-gray-400 rounded-full">
+                        !
+                    </span>
+                    <span
+                        class="sr-only">
+                        {% trans "Debug:" %}
+                    </span>
+                </div>
+                <!-- Info-->
+                <div
+                    x-show="notification.type === 'info'"
+                    class="z-50 flex-shrink-0">
+                    <span
+                        aria-hidden="true"
+                        class="inline-flex items-center justify-center w-6 h-6 text-xl font-bold text-gray-400 border-2 border-gray-400 rounded-full">
+                        !
+                    </span>
+                    <span
+                        class="sr-only">
+                        {% trans "Information:" %}
+                    </span>
+                </div>
+                <!-- Success -->
+                <div
+                    x-show="notification.type === 'success'"
+                    class="z-50 flex-shrink-0">
+                    <span
+                        aria-hidden="true"
+                        class="inline-flex items-center justify-center w-6 h-6 text-lg font-bold text-green-600 border-2 border-green-600 rounded-full">
+                        &check;
+                    </span>
+                    <span
+                        class="sr-only">
+                        {% trans "Success:" %}
+                    </span>
+                </div>
+                <!-- Warning -->
+                <div
+                    x-show="notification.type === 'warning'"
+                    class="z-50 flex-shrink-0">
+                    <span
+                        aria-hidden="true"
+                        class="inline-flex items-center justify-center w-6 h-6 text-xl font-bold text-orange-400 border-2 border-gray-400 rounded-full">
+                        &#x26A0;
+                    </span>
+                    <span
+                        class="sr-only">
+                        {% trans "Warning:" %}
+                    </span>
+                </div>
+                <!-- Error-->
+                <div
+                    x-show="notification.type === 'error'"
+                    class="z-50 flex-shrink-0">
+                    <span
+                        aria-hidden="true"
+                        class="inline-flex items-center justify-center w-6 h-6 text-lg font-bold text-red-600 border-2 border-red-600 rounded-full">
+                        &times;
+                    </span>
+                    <span
+                        class="sr-only">
+                        {% trans "Error:" %}
+                    </span>
+                </div>
+                <!-- Text -->
+                <div
+                    class="ml-3 w-0 flex-1 pt-0.5">
+                    <p
+                        x-text="notification.content"
+                        class="text-sm font-medium leading-5 text-gray-900">
+                    </p>
+                </div>
+                <!-- Remove button -->
+                <div
+                    class="flex flex-shrink-0 ml-4">
+                    <button
+                        @click="transitionOut()"
+                        type="button"
+                        class="inline-flex text-gray-400">
+                        <svg
+                            aria-hidden class="w-5 h-5"
+                            viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path
+                                fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd">
+                            </path>
+                        </svg>
+                        <span
+                            class="sr-only">
+                            {% translate "Close Notification" %}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+</div>

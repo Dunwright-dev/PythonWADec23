@@ -1,0 +1,47 @@
+<nav class="h-20 w-full border-2 border-gray-100">
+  <div class="h-20 flex justify-between items-center">
+    <div class="basis-1/5 ml-4">
+      <div class="flex">
+        <h1 class="text-xl">Time Since Page Load:</h1>
+      </div>
+      <div class="flex">
+        <h2 class="text-xl">
+          <span id="hour"></span>
+          <span>:</span>
+          <span id="minute"></span>
+          <span>:</span>
+          <span id="seconds"></span>
+        </h2>
+      </div>
+    </div>
+    <div class="basis-3/5 text-center">
+      <h1 class="text-3xl">Django + HTMX + Tailwind + Alpine</h1>
+    </div>
+
+    <div class="flex justify-end basis-1/5 mr-4">
+    </div>
+  </div>
+</nav>
+<script>
+window.onload = () => {
+  let hour = 0;
+  let minute = 0;
+  let seconds = 0;
+  let totalSeconds = 0;
+
+  let intervalId = null;
+
+  intervalId = setInterval(startTimer, 1000);
+    function startTimer() {
+      ++totalSeconds;
+      hour = Math.floor(totalSeconds / 3600);
+      minute = Math.floor((totalSeconds - hour * 3600) / 60);
+      seconds = totalSeconds - (hour * 3600 + minute * 60);
+
+      document.getElementById("hour").innerHTML = hour.toLocaleString(undefined,{minimumIntegerDigits: 2});
+      document.getElementById("minute").innerHTML = minute.toLocaleString(undefined,{minimumIntegerDigits: 2});
+      document.getElementById("seconds").innerHTML = seconds.toLocaleString(undefined,{minimumIntegerDigits: 2});
+    }
+}
+</script>
+{#console.log(x.toLocaleString(undefined,{minimumIntegerDigits: 2}));#}

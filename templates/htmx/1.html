@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% include "htmx/partials/navigation_bad.html" %}
+<div
+    class="fixed top-20 left-0 w-full flex justfy-between">
+    <div class="flex justify-between w-full m-4">
+        <div>
+            <a
+                href="#"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    << Previous
+                </button>
+            </a>
+            <p></p>
+        </div>
+        <div>
+            <a
+                href="{% url '2' %}"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    Next >>
+                </button>
+            </a>
+            <p>Expectations</p>
+        </div>
+    </div>
+</div>
+<div
+    class="flex justify-center text-4xl p-6">
+    <div
+        class="content-center text-center"
+        <h1
+            class="">
+            Welcome
+        </h1>
+         <p class="text-xl mt-12">Lets take a high level look at using HTMX, AlpineJS and Tailwind with Django.</p>
+
+         <p class="text-xl mt-12">I have not used Powerpoint for probably 20 years, so I made a website instead.</p>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  {% include "htmx/partials/navigation_bad.html" %}
+<div
+    class="fixed top-20 left-0 w-full flex justfy-between">
+    <div class="flex justify-between w-full m-4">
+        <div>
+            <a
+                href="{% url '3' %}"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    << Previous
+                </button>
+            </a>
+            <p>LOB</p>
+        </div>
+        <div>
+            <a
+                href="{% url '5' %}"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    Next >>
+                </button>
+            </a>
+            <p>Tailwind</p>
+        </div>
+    </div>
+</div>
+<div
+    class="flex justify-center">
+    <div
+        class="content-center">
+        <p
+        class="text-3xl">Tailwind</p>
+        <ul
+            class="list-disc text-xl">
+            <li class="pt-4">Utility First CSS framework</li>
+            <li>Customizable</li>
+            <li>Fast UI development</li>
+            <li>Responsive design</li>
+            <li>Screen size responsive</li>
+            <li>Constrained options</li>
+            <li>Less concern about breaking changes</li>
+            <li>Provide pre-built components to get you started</li>
+        </ul>
+      <br />
+      <br />
+      <h1>This is a h1</h1>
+      <h2>This is a h2</h2>
+      <p>This is a p</p>
+      <br />
+      <br />
+      <!-- <img class="w-[60%]"  src="{% static '4.png' %}"> -->
+    </div>
+</div>
+
+{% endblock content %}

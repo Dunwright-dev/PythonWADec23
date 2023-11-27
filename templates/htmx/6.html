@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include "htmx/partials/navigation_good.html" %}
+  <div
+    class="flex justify-between fixed top-0 p-8 w-full z-50"
+  >
+    <div>
+      <a
+        href="{% url '5' %}"
+        class=""
+      >
+        <button
+          type="button"
+          class="w-36 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          << Previous
+        </button>
+      </a>
+    </div>
+    <div>
+      <a
+        href="{% url '7' %}"
+        class=""
+      >
+        <button
+          type="button"
+          class="w-36 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Next >>
+        </button>
+      </a>
+    </div>
+  </div>
+  <!--
+  This example requires some changes to your config:
+
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/aspect-ratio'),
+    ],
+  }
+  ```
+-->
+<div class="bg-white mt-20">
+  <section aria-labelledby="features-heading" class="relative">
+    <div class="aspect-h-2 aspect-w-3 overflow-hidden sm:aspect-w-5 lg:aspect-none lg:absolute lg:h-full lg:w-1/2 lg:pr-4 xl:pr-16">
+      <img src="{% static '2.avif' %}" alt="Black leather journal with silver steel disc binding resting on wooden shelf with machined steel pen." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+    </div>
+
+    <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 sm:pb-32 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:pt-32">
+      <div class="lg:col-start-2">
+        <h2 id="features-heading" class="font-medium text-gray-500">Your new, lightweight, JavaScript framework.</h2>
+        <p class="mt-4 text-4xl font-bold tracking-tight text-gray-900">Alpine.JS</p>
+        <p class="mt-4 text-gray-500">Alpine is a rugged, minimal tool for composing behavior directly in your markup. Think of it like jQuery for the modern web. Plop in a script tag and get going.</p>
+
+        <dl class="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 text-sm sm:grid-cols-2">
+          <div>
+            <dt class="font-medium text-gray-900">Simple</dt>
+            <dd class="mt-2 text-gray-500">Just <span class="font-extrabold">15</span> attributes, <span class="font-extrabold">6</span> properties and <span class="font-extrabold">2</span> methods.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-gray-900">Extendable</dt>
+            <dd class="mt-2 text-gray-500">Can write plugins to do add features you need.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-gray-900">Paid UI Components</dt>
+            <dd class="mt-2 text-gray-500">High quality components with webcasts explaining how they work.</dd>
+          </div>
+          <div>
+            <dt class="font-medium text-gray-900"></dt>
+            <dd class="mt-2 text-gray-500"></dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+{% endblock content %}

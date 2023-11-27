@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.decorators import login_required
 
-from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .forms import AdminCustomUserChangeForm, AdminCustomUserCreationForm
 from .models import CustomUser
 
 # Customise the Admin title and header.
@@ -21,8 +21,8 @@ admin.site.login = login_required(admin.site.login)
 class CustomUserAdmin(UserAdmin):
     """Custom user admin."""
 
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
+    add_form = AdminCustomUserCreationForm
+    form = AdminCustomUserChangeForm
     model = CustomUser
 
     fieldsets = UserAdmin.fieldsets + (("User Type", {"fields": ("user_type",)}),)
@@ -33,6 +33,8 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "email",
                     "user_type",
+                    "department",
+                    "team",
                 )
             },
         ),

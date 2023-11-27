@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include "htmx/partials/navigation_bad.html" %}
+<div 
+    class="fixed top-20 left-0 w-full flex justfy-between">
+    <div class="flex justify-between w-full m-4">
+        <div>
+            <a 
+                href="{% url '2' %}" 
+                class="">
+                <button 
+                    type="button" 
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    << Previous
+                </button>
+            </a>
+            <p>Expectations</p>
+        </div>
+        <div>
+            <a 
+                href="{% url '4' %}" 
+                class="">
+                <button 
+                    type="button" 
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    Next >>
+                </button>
+            </a>
+            <p>Tailwind</p>
+        </div>
+    </div>
+</div>
+<div 
+    class="flex justify-center">  
+    <div 
+        class="content-center mt-20">
+        <img 
+            src="{% static '1.png' %}">
+    <a
+        class=""
+        href="https://htmx.org/essays/locality-of-behaviour/"
+        class="text-blue-500">
+            Source
+    </a>
+    </div>
+</div>
+{% endblock content %}

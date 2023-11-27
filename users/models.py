@@ -128,3 +128,15 @@ class CustomUser(AbstractUser):
         default=CustomUserType.FREE,
         help_text="Displays the users current user type.",
     )
+
+    department = models.CharField(
+        null=True,
+        blank=True,
+        max_length=50,
+    )
+
+    team = models.CharField(
+        null=True,
+        blank=True,
+        max_length=50,
+    )

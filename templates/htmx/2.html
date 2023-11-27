@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include "htmx/partials/navigation_bad.html" %}
+<div
+    class="fixed top-20 left-0 w-full flex justfy-between">
+    <div class="flex justify-between w-full m-4">
+        <div>
+            <a
+                href="{% url '1' %}"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    << Previous
+                </button>
+            </a>
+            <p>Welcome</p>
+        </div>
+        <div>
+            <a
+                href="{% url '3' %}"
+                class="">
+                <button
+                    type="button"
+                    class="p-4 w-36 bg-zinc-500 rounded-lg">
+                    Next >>
+                </button>
+            </a>
+            <p>LOB</p>
+        </div>
+    </div>
+</div>
+<div class="flex justify-center">
+    <div class="content-center mt-20">
+        <p class="text-3xl">A little bit about me:</p>
+        <ul class="list-disc text-xl">
+            <li class="pt-4">No formal training in programming (self taught)</li>
+            <li>I am not a UI designer</li>
+            <li>Most (all) webdev work in Django</li>
+            <li>Electrician by trade working in O&G</li>
+        </ul>
+    </div>
+</div>
+    <div class="flex justify-center content-center mt-36">
+        <a class="text-4xl" href="https://slides.com/bendog/happy-18-django">Happy 18th Birthday Django</a>
+    </div>
+{% endblock content %}

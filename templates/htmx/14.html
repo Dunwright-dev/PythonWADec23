@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  {% include "htmx/partials/navigation_good.html" %}
+
+  <div id="container" class="bg-white">
+    <div
+    class="flex justify-between fixed top-0 p-8 w-full z-50"
+  >
+    <div>
+      <a
+        href="{% url '13' %}"
+        class=""
+      >
+        <button
+          type="button"
+          class="w-36 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          << Previous
+        </button>
+      </a>
+    </div>
+    <div>
+        <button
+          type="button"
+          hx-get="{% url '9' 1 %}"
+          hx-target="#container"
+          hx-push-url="true"
+          class="w-36 rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Next >>
+        </button>
+    </div>
+  </div>
+
+  <img class="w-full content-center" src="{% static '3.png' %}">
+
+<div class="bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-12 sm:pt-12 lg:px-8 lg:py-24">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+      <div class="lg:col-span-5">
+        <h2 class="text-2xl font-bold leading-10 tracking-tight text-gray-900">Thank you and Questions</h2>
+        <p class="mt-4 text-base leading-7 text-gray-600">Here are some useful resources to get started:</p>
+        <ul class="w-96 text-gray-900 mt-12">
+            <li
+                class="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                <a href="https://github.com/imAsparky/django-cookiecutter" class="">https://github.com/imAsparky/django-cookiecutter</a>
+            </li>
+            <li
+                class="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                <a href="https://github.com/adamchainz/django-htmx">django-htmx - adamchainz</a>
+            </li>
+            <li
+                class="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                <a href="https://github.com/timonweb/django-tailwind">django-tailwind - timonweb</a>
+            </li>
+            <li
+                class="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                <a href="https://www.youtube.com/@bugbytes3923">BugBytes YouTube</a>
+            </li>
+            <li
+                class="w-full border-b-2 border-neutral-100 border-opacity-100 py-4 dark:border-opacity-50">
+                <a href="https://devdojo.com/pines">Pines - Alpine and Tailwind UI Library</a>
+            </li>
+            <li class="w-full py-4"><a href="https://discord.gg/vGEVVahQuW">HTMX Discord Group</a></li>
+        </ul>
+      </div>
+      <div class="mt-10 lg:col-span-7 lg:mt-0">
+        <dl class="space-y-10">
+          <div>
+            <dt class="text-base font-semibold leading-7 text-gray-900">How do you make holy water?</dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">You boil the hell out of it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
+          </div>
+          <div>
+            <dt class="text-base font-semibold leading-7 text-gray-900">What's the best thing about Switzerland?</dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
+          </div>
+          <div>
+            <dt class="text-base font-semibold leading-7 text-gray-900">What do you call someone with no body and no nose?</dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">Nobody knows. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
+          </div>
+          <div>
+            <dt class="text-base font-semibold leading-7 text-gray-900">Why do you never see elephants hiding in trees?</dt>
+            <dd class="mt-2 text-base leading-7 text-gray-600">Because they're so good at it. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.</dd>
+          </div>
+
+          <!-- More questions... -->
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -54,7 +54,7 @@ MANAGERS = ADMINS
 # service provider.  Change to something like "SYSTEM@your_domain.com"
 SERVER_EMAIL = ""
 
-#Django Settings
+# Django Settings
 # LOGIN_REDIRECT_URL For new project convenience, change to your project requirements.
 LOGIN_REDIRECT_URL = "/admin/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"
@@ -87,6 +87,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_extensions",
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -237,7 +238,7 @@ LOGGING = {
     },
     "loggers": {
         "": {
-            "handlers": ["console","mail_admins", "rotated_logs", "stdout"],
+            "handlers": ["console", "mail_admins", "rotated_logs", "stdout"],
             # "level": Overridden in each config/settings file for environ
         },
         "django": {
@@ -270,6 +271,7 @@ def exception_hook(type, value, traceback):
     logging.getLogger("*excepthook*").critical(
         f"Uncaught Exception!", exc_info=(type, value, traceback)
     )
+
 
 # The function assigned to sys.excepthook is called just before control is
 # returned to the prompt; in a Python program this happens just before

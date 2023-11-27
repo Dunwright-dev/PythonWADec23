@@ -6,9 +6,12 @@
 <html>
   <head>
     <title>{% block head_title %}{% endblock %}</title>
-    <script defer src="https://unpkg.com/alpinejs@3.8.1/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/htmx.org@1.6.1" integrity="sha384-tvG/2mnCFmGQzYC1Oh3qxQ7CkQ9kMzYjWZSNtrRZygHPDDqottzEJsqS4oUVodhW" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
     {% django_htmx_script %}
+    {% tailwind_css %}
     
     
     
@@ -17,6 +20,7 @@
   </head>
   {% comment %} https://www.mattlayman.com/blog/2021/how-to-htmx-django/ {% endcomment %}
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+
    {% block body %}
     {% if messages %}
     <div>
@@ -28,28 +32,58 @@
       </ul>
     </div>
     {% endif %}
-    
-    
-    
+
     <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
+      {% block content %}
+      {% endblock content %}
     </div>
-    {% block content %}
-    {% endblock content %}
+
 
     {% endblock body %}
 
     {% block extra_body %}
     {% endblock extra_body %}
+
+  {% include 'partials/modal.html' %}
+  {%  include 'partials/messages.html' %}
+
+  <script>
+    document.addEventListener('alpine:init', () => {
+      Alpine.store('displayModal', {
+        on: false,
+        showModal() {
+          console.log("showModal");
+          this.on = true;
+        },
+        hideModal() {
+          console.log("hideModal");
+          this.on = false;
+          document.getElementById("modal").innerHTML = ''
+        },
+      })
+    })
+    </script>
+
+    {% comment %} This script adds HTMX event listeners to show/hide the dialog box {% endcomment %}
+    <script>
+    htmx.on("htmx:afterSwap", (e) => {
+      // Response targeting #dialog => show the modal
+      if (e.detail.target.id == "modal") {
+      Alpine.store('displayModal').showModal();
+      }
+    }),
+    htmx.on("htmx:afterOnLoad", (e) =>{
+      if(e.detail.target.id == "modal" && !e.detail.xhr.response){
+      Alpine.store('displayModal').hideModal();
+      }
+    })
+    htmx.on("htmx:afterOnLoad", (e) =>{
+      if(!e.detail.xhr.response){
+      Alpine.store('displayModal').hideModal();
+      }
+    })
+    </script>
+
   </body>
 </html>
 

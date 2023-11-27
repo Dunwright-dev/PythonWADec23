@@ -1,0 +1,124 @@
+<form>
+  <div class="space-y-12">
+    <div class="border-b border-gray-900/10 pb-12">
+      <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information Update</h2>
+      <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+
+      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+        <div class="sm:col-span-3">
+          <label for="{{ form.first_name.id_for_label }}" class="block text-sm font-medium leading-6 text-gray-900">First name</label>
+          <div class="mt-2">
+            <input
+              type="text" name="first_name" id="id_first_name" max_length="150" value="{{ form.first_name.value }}" autocomplete="given-name"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+            {% if form.first_name.errors %}
+              <p class="mt-1 text-sm leading-6 text-red-600">{{ form.first_name.errors }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="id_last_name" class="block text-sm font-medium leading-6 text-gray-900">Last name</label>
+          <div class="mt-2">
+            <input
+              type="text" name="last_name" id="id_last_name" value="{{ form.last_name.value }}" autocomplete="family-name"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+            {% if form.last_name.errors %}
+              <p class="mt-1 text-sm leading-6 text-red-600">{{ form.last_name.errors }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="sm:col-span-6">
+          <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+          <div class="mt-2">
+            <input
+              id="email" name="email" type="email" value="{{ form.email.value }}" autocomplete="email"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+            {% if form.email.errors %}
+              <div class="mt-1 text-sm leading-6 text-red-600">{{ form.email.errors }}</div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="department" class="block text-sm font-medium leading-6 text-gray-900">Department</label>
+          <div class="mt-2">
+            <select
+              id="department" name="department" hx-get="{% url '12_group_dropdown' %}" hx-target="#id_team"
+              hx-swap="outerHTML" hx-vals="js:{department: document.getElementById('department').value}" value="{{ form.department.value }}"
+              class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+              {% if form.department.value == "None" %}
+                <option value="None" selected>None</option>
+              {% else %}
+                <option value="None">None</option>
+              {% endif %}
+              {% if form.department.value == "Corporate" %}
+                <option value="Corporate" selected>Corporate</option>
+              {% else %}
+                <option value="Corporate">Corporate</option>
+              {% endif %}
+              {% if form.department.value == "Developer" %}
+                <option value="Developer" selected>Developer</option>
+              {% else %}
+                <option value="Developer">Developer</option>
+              {% endif %}
+              {% if form.department.value == "Sales" %}
+                <option value="Sales" selected>Sales</option>
+              {% else %}
+                <option value="Sales">Sales</option>
+              {% endif %}
+            </select>
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="id_team" class="block text-sm font-medium leading-6 text-gray-900">Group</label>
+          <div class="mt-2">
+            <select
+              id="id_team" name="team"
+              class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+              {% for option in options %}
+                <option {% if team == option %}selected{% endif %}>{{ option }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="id_user_type" class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+          <div class="mt-2">
+            <select
+              id="id_user_type" name="user_type"
+              class="block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            >
+              <option value="STAFF" selected>Staff</option>
+              <option value="LEVEL 1">Level 1</option>
+              <option value="LEVEL 2">Level 2</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <button type="button" @click="$store.displayModal.hideModal()" class="text-sm font-semibold leading-6 text-gray-900">Cancel</button>
+    <button
+      type="button"
+      hx-post="{% url '12_update' user_id %}"
+      hx-target="#modal"
+      class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    >Save
+    </button>
+  </div>
+</form>
+
+
+{#{{ form.as_p }}#}
