@@ -75,7 +75,7 @@ Lazy loading in the list of users.
 Add a user is utilising HTMX and AlpineJS to display the modal.
 Chaining dropdowns using HTMX.
 
-Using events to update the user list after a change.
+Using events to update the user list after a change and display the message.
 
 Delete is using hx-confirm as a prompt.
 

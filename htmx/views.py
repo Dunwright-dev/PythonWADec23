@@ -150,9 +150,16 @@ class TwelveCreateView(HtmxCreateView):
 
     def form_valid(self, form):
         self.object = form.save()
+        hx_trig = {
+            "notify": {
+                "type": "success",
+                "content": "User Created Successfully",
+            },
+            "update": {},
+        }
         return HttpResponse(
             status=204,
-            headers={"HX-Trigger": "update"},
+            headers={"HX-Trigger": json.dumps(hx_trig)},
         )
 
 
@@ -199,9 +206,16 @@ class TwelveUpdateView(HtmxUpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
+        hx_trig = {
+            "notify": {
+                "type": "success",
+                "content": "User Updated Successfully",
+            },
+            "update": {},
+        }
         return HttpResponse(
             status=204,
-            headers={"HX-Trigger": "update"},
+            headers={"HX-Trigger": json.dumps(hx_trig)},
         )
 
 
